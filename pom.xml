@@ -81,15 +81,13 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<dependency> <groupId>org.hibernate</groupId> 
-		<artifactId>hibernate-core</artifactId> 
-			<version>4.3.4.Final</version> 
-			</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>3.6.10.Final</version>
-		</dependency> -->
+			<version>4.3.4.Final</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-core</artifactId> 
+			<version>3.6.10.Final</version> </dependency> -->
 
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
@@ -116,12 +114,22 @@
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-context</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>
+		</dependency>
+		<!-- Google Gson for Json manipulation -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.6.2</version>
 		</dependency>
 
 	</dependencies>
