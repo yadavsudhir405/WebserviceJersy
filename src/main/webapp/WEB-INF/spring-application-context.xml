@@ -12,10 +12,33 @@
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd" >
 
     <context:property-placeholder location="classpath*:webserviceFinal.properties" />
-    <context:component-scan base-package="com.sudhir.webservices.jersy"/>
-   <!--  <import resource="classpath*:/META-INF/hibernateDb.xml" /> -->
-   <!--  <bean id="test" class="com.sudhir.model.TestModel">
-    	<property name="name" value="hello"></property>
-    	<property name="age" value="25"></property>
-    </bean> -->
+    <context:component-scan base-package="com.sudhir.webservices.jersy,com.sudhir.dao.*"/>
+    
+    <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value=""></property>
+
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="packagesToScan" value="com.sudhir.dao.*" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.connection.pool_size">${hibernate.connection.pool_size}</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>

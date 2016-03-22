@@ -1,6 +1,5 @@
 package com.sudhir.webservices.jersy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -12,17 +11,20 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sudhir.model.TestModel;
+import com.sudhir.common.ApplicationContextUtil;
+import com.sudhir.dao.entity.SplitterEntity;
+import com.sudhir.dao.service.SplitterEntityService;
 
 /**
  * Root resource (exposed at "myresource" path)
  */
 @Component
 @Path("myresource")
-public class MyResource {
-	@Autowired
-	private Hello testmodel;
+public class SplitterRestService {
 
+	//private SplitterEntityService splitterEntityService = (SplitterEntityService) ApplicationContextUtil.ctx.getBean("splitterEntityService");
+	@Autowired
+	private SplitterEntityService splitterEntityService;
 	/**
 	 * Method handling HTTP GET requests. The returned object will be sent to
 	 * the client as "text/plain" media type.
@@ -32,10 +34,8 @@ public class MyResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getIt() {
-		List<TestModel> list=new ArrayList<TestModel>();
-		list.add(testmodel.getMessage());
-		list.add(testmodel.getMessage());
-		list.add(testmodel.getMessage());
+
+		List<SplitterEntity> list = splitterEntityService.getAllSplitter();
 		return Response.status(201).entity(list).build();
 	}
 }
