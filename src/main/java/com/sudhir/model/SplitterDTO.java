@@ -1,5 +1,8 @@
 package com.sudhir.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class SplitterDTO {
 	private String userName;
 	private String city;

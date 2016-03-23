@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,14 +25,13 @@ import com.sudhir.model.services.SplitterDTOService;
  * Root resource (exposed at "myresource" path)
  */
 @Component
-@Path("myresource")
+@Path("/myresource/{userName}")
 public class SplitterRestService {
 
 	//private SplitterEntityService splitterEntityService = (SplitterEntityService) ApplicationContextUtil.ctx.getBean("splitterEntityService");
 	@Autowired
 	private SplitterEntityService splitterEntityService;
 	
-	private static final Gson GSON=new Gson();
 	/**
 	 * Method handling HTTP GET requests. The returned object will be sent to
 	 * the client as "text/plain" media type.
@@ -41,7 +41,7 @@ public class SplitterRestService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getIt() {
-		System.out.println("Inside WebService");
+		System.out.println("Inside WebService+++ ");
 		List<SplitterEntity> list = splitterEntityService.getAllSplitter();
 		return Response.status(javax.ws.rs.core.Response.Status.ACCEPTED).entity(list).build();
 	}
@@ -63,4 +63,5 @@ public class SplitterRestService {
 		}
 		
 	}
+	
 }
